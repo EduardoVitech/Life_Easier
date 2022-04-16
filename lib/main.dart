@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:life_easier/pages/home_page/home_page.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+main() => runApp(const LifeEasierApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class LifeEasierApp extends StatelessWidget {
+  const LifeEasierApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Life Easier',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const Text('Home Page'),
+    return const MaterialApp(
+      home: MyHomePage(),
     );
   }
 }
