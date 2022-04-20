@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_easier/components/graphic/graphic.dart';
-import 'package:life_easier/components/new_transaction/new_transaction.dart';
-import 'package:life_easier/components/transaction_list/transaction_list.dart';
+import 'package:life_easier/components/transaction_user/transaction_user.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
@@ -17,15 +16,9 @@ class MyHomePage extends StatelessWidget {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // Grafico
-          const Graphic(),
-
-          // Lista de transações
-          TransactionList(),
-
-          // Add nova transação
-          const NewTransaction(),
+        children: const [
+          Graphic(),
+          TransactionUser(),
         ],
       ),
     );
