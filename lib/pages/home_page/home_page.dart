@@ -34,6 +34,10 @@ class MyHomePage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          //
+          // Grafico
+          //
+
           Container(
             child: const Card(
               elevation: 5,
@@ -41,6 +45,11 @@ class MyHomePage extends StatelessWidget {
               child: Text('Gráfico'),
             ),
           ),
+
+          //
+          // Lista de transações
+          //
+
           Column(
             children: _transactions.map((tr) {
               return Card(
@@ -90,6 +99,11 @@ class MyHomePage extends StatelessWidget {
               );
             }).toList(),
           ),
+
+          //
+          // Add nova transação
+          //
+
           Card(
             elevation: 5,
             child: Padding(
