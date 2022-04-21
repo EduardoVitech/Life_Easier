@@ -14,12 +14,14 @@ class MyHomePage extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: const [
-          Graphic(),
-          TransactionUser(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: const [
+            Graphic(),
+            TransactionUser(),
+          ],
+        ),
       ),
     );
   }
