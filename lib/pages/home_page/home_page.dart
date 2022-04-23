@@ -13,19 +13,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _transactions = [
-    Transaction(
-      id: 't1',
-      title: 'Comida',
-      value: 120.30,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Ovo de pascoa',
-      value: 35.00,
-      date: DateTime.now(),
-    ),
+  final List<Transaction> _transactions = [
+    //  Transaction(
+    //    id: 't1',
+    //    title: 'Comida',
+    //    value: 120.30,
+    //    date: DateTime.now(),
+    //  ),
+    //  Transaction(
+    //    id: 't2',
+    //    title: 'Ovo de pascoa',
+    //    value: 35.00,
+    //    date: DateTime.now(),
+    //  ),
   ];
 
   _addTransaction(String title, double value) {
@@ -62,14 +62,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Graphic(),
+            const Graphic(),
             TransactionList(_transactions),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _openTransactionFormModal(context),
-        backgroundColor: Colors.amber.shade600,
         child: const Icon(
           Icons.add,
           color: Colors.black,
