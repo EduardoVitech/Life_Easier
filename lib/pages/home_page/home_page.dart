@@ -14,19 +14,33 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [
-    //  Transaction(
-    //    id: 't1',
-    //    title: 'Comida',
-    //    value: 120.30,
-    //    date: DateTime.now(),
-    //  ),
-    //  Transaction(
-    //    id: 't2',
-    //    title: 'Ovo de pascoa',
-    //    value: 35.00,
-    //    date: DateTime.now(),
-    //  ),
+    Transaction(
+      id: 't0',
+      title: 'Conta Antiga',
+      value: 300.30,
+      date: DateTime.now().subtract(const Duration(days: 33)),
+    ),
+    Transaction(
+      id: 't1',
+      title: 'Comida',
+      value: 120.30,
+      date: DateTime.now().subtract(const Duration(days: 3)),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Ovo de pascoa',
+      value: 35.00,
+      date: DateTime.now().subtract(const Duration(days: 2)),
+    ),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _transactions.where((tr) {
+      return tr.date.isAfter(DateTime.now().subtract(
+        const Duration(days: 7),
+      ));
+    }).toList();
+  }
 
   _addTransaction(String title, double value) {
     final newTransaction = Transaction(
@@ -62,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Graphic(),
+            Graphic(_recentTransactions),
             TransactionList(_transactions),
           ],
         ),

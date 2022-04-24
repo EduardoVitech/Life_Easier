@@ -23,7 +23,7 @@ class TransactionList extends StatelessWidget {
                 Container(
                   height: 200,
                   child: Image.asset(
-                    'assets/images/waiting.png',
+                    'assets/images/kisspng-line-angle-point-brand-zzz-cliparts-5a763d8711e3e3.0758856215176984390733.png',
                     fit: BoxFit.cover,
                   ),
                 )
