@@ -14,6 +14,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [];
+  bool _showGraphic = false;
 
   List<Transaction> get _recentTransactions {
     return _transactions.where((tr) {
@@ -55,16 +56,59 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool _isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
+    final appBar = AppBar(
+      title: const Text('Despesas Pessoais'),
+      actions: [
+        if (_isLandscape)
+          IconButton(
+            onPressed: () {
+              setState(() {
+                _showGraphic = !_showGraphic;
+              });
+            },
+            icon: Icon(_showGraphic ? Icons.list : Icons.show_chart),
+          )
+      ],
+    );
+
+    final availabelHeight = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Despesas Pessoais'),
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Graphic(_recentTransactions),
-            TransactionList(_transactions, _removeTransactions),
+            //if (_isLandscape)
+            //  Row(
+            //    mainAxisAlignment: MainAxisAlignment.center,
+            //    children: [
+            //      const Text('Exibir Grafico'),
+            //      Switch(
+            //        value: _showGraphic,
+            //        onChanged: (value) {
+            //          setState(() {
+            //            _showGraphic = value;
+            //          });
+            //        },
+            //      ),
+            //    ],
+            //  ),
+            if (_showGraphic || !_isLandscape)
+              Container(
+                height: availabelHeight * (_isLandscape ? 0.8 : 0.3),
+                child: Graphic(_recentTransactions),
+              ),
+            if (!_showGraphic || !_isLandscape)
+              Container(
+                height: availabelHeight * (_isLandscape ? 1 : 0.7),
+                child: TransactionList(_transactions, _removeTransactions),
+              ),
           ],
         ),
       ),

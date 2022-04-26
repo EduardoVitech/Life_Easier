@@ -11,6 +11,7 @@ class LifeEasierApp extends StatelessWidget {
     final ThemeData tema = ThemeData();
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: tema.copyWith(
         colorScheme: tema.colorScheme.copyWith(
           primary: Colors.purple,
