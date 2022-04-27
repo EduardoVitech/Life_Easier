@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'dart:math';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:life_easier/components/graphic/graphic.dart';
 import 'package:life_easier/components/new_transaction/new_transaction.dart';
@@ -54,51 +56,64 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Widget _getIconButton(IconData icon, Function() fn) {
+    return Platform.isIOS
+        ? GestureDetector(onTap: fn, child: Icon(icon))
+        : IconButton(onPressed: fn, icon: Icon(icon));
+  }
+
   @override
   Widget build(BuildContext context) {
     bool _isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
 
+    //
+    // ACTIONS
+    //
+
+    final iconList = Platform.isIOS ? CupertinoIcons.list_dash : Icons.list;
+    final iconGraphic =
+        Platform.isIOS ? CupertinoIcons.chart_bar_alt_fill : Icons.show_chart;
+
+    final actions = [
+      if (_isLandscape)
+        _getIconButton(
+          _showGraphic ? iconList : iconGraphic,
+          () {
+            setState(() {
+              _showGraphic = !_showGraphic;
+            });
+          },
+        ),
+      if (Platform.isIOS)
+        _getIconButton(
+          Platform.isIOS ? CupertinoIcons.add : Icons.add,
+          () => _openTransactionFormModal(context),
+        ),
+    ];
+
+    //
+    // APPBAR
+    //
+
     final appBar = AppBar(
       title: const Text('Despesas Pessoais'),
-      actions: [
-        if (_isLandscape)
-          IconButton(
-            onPressed: () {
-              setState(() {
-                _showGraphic = !_showGraphic;
-              });
-            },
-            icon: Icon(_showGraphic ? Icons.list : Icons.show_chart),
-          )
-      ],
+      actions: actions,
     );
 
     final availabelHeight = MediaQuery.of(context).size.height -
         appBar.preferredSize.height -
         MediaQuery.of(context).padding.top;
 
-    return Scaffold(
-      appBar: appBar,
-      body: SingleChildScrollView(
+    //
+    // BODYPAGE
+    //
+
+    final bodyPage = SafeArea(
+      child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            //if (_isLandscape)
-            //  Row(
-            //    mainAxisAlignment: MainAxisAlignment.center,
-            //    children: [
-            //      const Text('Exibir Grafico'),
-            //      Switch(
-            //        value: _showGraphic,
-            //        onChanged: (value) {
-            //          setState(() {
-            //            _showGraphic = value;
-            //          });
-            //        },
-            //      ),
-            //    ],
-            //  ),
             if (_showGraphic || !_isLandscape)
               Container(
                 height: availabelHeight * (_isLandscape ? 0.8 : 0.3),
@@ -112,14 +127,33 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _openTransactionFormModal(context),
-        child: const Icon(
-          Icons.add,
-          color: Colors.black,
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
+
+    return Platform.isIOS
+        ? CupertinoPageScaffold(
+            navigationBar: CupertinoNavigationBar(
+              middle: const Text('Despesas Pessoais'),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: actions,
+              ),
+            ),
+            child: bodyPage,
+          )
+        : Scaffold(
+            appBar: appBar,
+            body: bodyPage,
+            floatingActionButton: Platform.isIOS
+                ? Container()
+                : FloatingActionButton(
+                    onPressed: () => _openTransactionFormModal(context),
+                    child: const Icon(
+                      Icons.add,
+                      color: Colors.black,
+                    ),
+                  ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+          );
   }
 }

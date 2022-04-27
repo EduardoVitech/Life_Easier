@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:life_easier/components/adaptative_button/adaptative_button.dart';
+
+import '../adaptative_textfield/adaptative_textfield.dart';
 
 class NewTransaction extends StatefulWidget {
   final void Function(String, double, DateTime) onSubmit;
@@ -57,21 +60,17 @@ class _NewTransactionState extends State<NewTransaction> {
           ),
           child: Column(
             children: [
-              TextField(
+              AdaptativeTextfield(
                 controller: _titleController,
                 onSubmitted: (_) => _submitForm(),
-                decoration: const InputDecoration(
-                  labelText: 'Título',
-                ),
+                label: 'Título',
               ),
-              TextField(
+              AdaptativeTextfield(
                 controller: _valueController,
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                 onSubmitted: (_) => _submitForm(),
-                decoration: const InputDecoration(
-                  labelText: 'Valor (R\$)',
-                ),
+                label: 'Valor (R\$)',
               ),
               Container(
                 height: 70,
@@ -97,18 +96,9 @@ class _NewTransactionState extends State<NewTransaction> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  ElevatedButton(
-                    onPressed: _submitForm(),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.purple),
-                    ),
-                    child: const Text(
-                      'Nova Transação',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
+                  AdaptativeButton(
+                    label: 'Nova Transação',
+                    onPressed: _submitForm,
                   ),
                 ],
               ),
