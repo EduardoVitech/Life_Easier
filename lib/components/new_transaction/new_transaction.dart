@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:life_easier/components/adaptative_button/adaptative_button.dart';
+import 'package:life_easier/components/new_transaction/date_text/date_text.dart';
 
 import '../adaptative_textfield/adaptative_textfield.dart';
 
@@ -72,26 +73,9 @@ class _NewTransactionState extends State<NewTransaction> {
                 onSubmitted: (_) => _submitForm(),
                 label: 'Valor (R\$)',
               ),
-              Container(
-                height: 70,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(_selectedDate == null
-                          ? 'Nenhuma data selecionada!'
-                          : 'Data Selecionada: ${DateFormat('dd/MM/y').format(_selectedDate!)}'),
-                    ),
-                    TextButton(
-                      onPressed: _ShowDatePicker,
-                      child: const Text(
-                        'Selecionar Data',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              DateText(
+                selectedDate: _selectedDate,
+                showDatePicker: _ShowDatePicker,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
