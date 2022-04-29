@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:life_easier/components/adaptative_button/adaptative_button.dart';
-import 'package:life_easier/components/new_transaction/date_text/date_text.dart';
+import 'package:life_easier/components/adaptatives/adaptative_button/adaptative_button.dart';
 
-import '../adaptative_textfield/adaptative_textfield.dart';
+import '../adaptatives/adaptative_date_text/adaptative_date_text.dart';
+import '../adaptatives/adaptative_textfield/adaptative_textfield.dart';
 
 class NewTransaction extends StatefulWidget {
   final void Function(String, double, DateTime) onSubmit;
@@ -28,23 +28,6 @@ class _NewTransactionState extends State<NewTransaction> {
     }
 
     widget.onSubmit(title, value, _selectedDate!);
-  }
-
-  _ShowDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2021),
-      lastDate: DateTime.now(),
-    ).then((pickedDate) {
-      if (pickedDate == null) {
-        return;
-      }
-
-      setState(() {
-        _selectedDate = pickedDate;
-      });
-    });
   }
 
   @override
@@ -73,9 +56,13 @@ class _NewTransactionState extends State<NewTransaction> {
                 onSubmitted: (_) => _submitForm(),
                 label: 'Valor (R\$)',
               ),
-              DateText(
+              AdaptativeDateText(
                 selectedDate: _selectedDate,
-                showDatePicker: _ShowDatePicker,
+                onDateChanged: (newDate) {
+                  setState(() {
+                    _selectedDate = newDate;
+                  });
+                },
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
