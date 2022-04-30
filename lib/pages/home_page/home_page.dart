@@ -18,6 +18,16 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [];
   bool _showGraphic = false;
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   List<Transaction> get _recentTransactions {
     return _transactions.where((tr) {
       return tr.date.isAfter(DateTime.now().subtract(

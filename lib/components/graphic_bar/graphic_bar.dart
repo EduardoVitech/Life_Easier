@@ -17,6 +17,7 @@ class GraphicBar extends StatelessWidget {
       builder: (ctx, constraints) {
         return Column(
           children: [
+            // ignore: sized_box_for_whitespace
             Container(
               height: constraints.maxHeight * 0.15,
               child: FittedBox(
@@ -26,6 +27,7 @@ class GraphicBar extends StatelessWidget {
             SizedBox(
               height: constraints.maxHeight * 0.05,
             ),
+            // ignore: sized_box_for_whitespace
             Container(
               height: constraints.maxHeight * 0.6,
               width: 13,
@@ -57,6 +59,7 @@ class GraphicBar extends StatelessWidget {
             SizedBox(
               height: constraints.maxHeight * 0.05,
             ),
+            // ignore: sized_box_for_whitespace
             Container(
               height: constraints.maxHeight * 0.15,
               child: FittedBox(
