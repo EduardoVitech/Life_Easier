@@ -1,16 +1,20 @@
-# life_easier
+# Life Easier
 
-A new Flutter project.
+App de controle de despesas desenvolvido em Flutter.
 
-## Getting Started
+# Telas
 
-This project is a starting point for a Flutter application.
+- ## Home
+  - ![Home](./assets/HOME.png)
 
-A few resources to get you started if this is your first Flutter project:
+  - ![Home Off](./assets/HOME-OFF.png)
+  
+  - ![Home 2](./assets/HOME-2.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+  - ![Home 3](./assets/HOME3.png)
+  
+  - ![Home Off](./assets/HOME-OFF2.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- ## Cadastro de Despesa
+  - ![Cadastro de Despesa](./assets/CADASTRO.png)
+  - ![Cadastro de Data](./assets/DATA.png)
